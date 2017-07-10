@@ -1,4 +1,4 @@
-package cr.ac.ucr.ecci.ci1310.cache;
+package cr.ac.ucr.ecci.ci1310.cache.caches;
 
 /**
  * Cache interface

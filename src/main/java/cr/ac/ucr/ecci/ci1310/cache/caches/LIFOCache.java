@@ -1,4 +1,4 @@
-package cr.ac.ucr.ecci.ci1310.cache;
+package cr.ac.ucr.ecci.ci1310.cache.caches;
 
 /**
  * Uses Last in First Out as replacement algorithm in case of full cache
