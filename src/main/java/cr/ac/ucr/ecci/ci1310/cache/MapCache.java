@@ -1,12 +1,12 @@
-package cr.ac.ucr.ecci.ci1310.cache.caches;
+package cr.ac.ucr.ecci.ci1310.cache;
 
 import java.util.HashMap;
 
 /**
  * Structure for caches with hashmap as storage structure
  */
-abstract class MapCache<K, V> {
-    protected HashMap<K, V> data;
+abstract class MapCache<K, V> implements Cache<K, V> {
+    protected HashMap<K, Entry> data;
     private int maxElements;
     private String name;
     private int size;

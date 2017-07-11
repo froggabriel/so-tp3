@@ -1,9 +1,13 @@
-package cr.ac.ucr.ecci.ci1310.cache.caches;
+package cr.ac.ucr.ecci.ci1310.cache;
+
+import java.util.List;
 
 /**
  * Removes random element when cache full
  */
-public class RandomCache<K, V> extends MapCache<K, V> implements Cache<K, V> {
+public class RandomCache<K, V> extends MapCache<K, V> {
+    private List<Entry<K, V>> entryList;
+
     public RandomCache(int maxElements, String name, int size, long lifespan, long elemLifespan) {
         super(maxElements, name, size, lifespan, elemLifespan);
     }

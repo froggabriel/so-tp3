@@ -1,9 +1,13 @@
-package cr.ac.ucr.ecci.ci1310.cache.caches;
+package cr.ac.ucr.ecci.ci1310.cache;
+
+import java.util.Queue;
 
 /**
  * Uses First in First Out as replacement algorithm in case of full cache
  */
-public class FIFOCache<K, V> extends MapCache<K, V> implements Cache<K, V> {
+public class FIFOCache<K, V> extends MapCache<K, V> {
+    private Queue<Entry<K, V>> entryQueue;
+
     public FIFOCache(int maxElements, String name, int size, long lifespan, long elemLifespan) {
         super(maxElements, name, size, lifespan, elemLifespan);
     }

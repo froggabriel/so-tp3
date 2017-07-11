@@ -1,9 +1,13 @@
-package cr.ac.ucr.ecci.ci1310.cache.caches;
+package cr.ac.ucr.ecci.ci1310.cache;
+
+import java.util.PriorityQueue;
 
 /**
  * Uses Least Recently Used as replacement algorithm in case of full cache
  */
-public class LRUCache<K, V> extends MapCache<K, V> implements Cache<K, V> {
+public class LRUCache<K, V> extends MapCache<K, V> {
+    private PriorityQueue<Entry<K, V>> entryPriorityQueue;
+
     public LRUCache(int maxElements, String name, int size, long lifespan, long elemLifespan) {
         super(maxElements, name, size, lifespan, elemLifespan);
     }

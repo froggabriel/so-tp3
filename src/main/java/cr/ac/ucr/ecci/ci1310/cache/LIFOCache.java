@@ -1,9 +1,13 @@
-package cr.ac.ucr.ecci.ci1310.cache.caches;
+package cr.ac.ucr.ecci.ci1310.cache;
+
+import java.util.Stack;
 
 /**
  * Uses Last in First Out as replacement algorithm in case of full cache
  */
-public class LIFOCache<K, V> extends MapCache<K, V> implements Cache<K, V> {
+public class LIFOCache<K, V> extends MapCache<K, V> {
+    private Stack<Entry<K, V>> entryStack;
+
     public LIFOCache(int maxElements, String name, int size, long lifespan, long elemLifespan) {
         super(maxElements, name, size, lifespan, elemLifespan);
     }
