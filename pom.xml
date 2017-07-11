@@ -15,4 +15,33 @@
       <version>6.0.6</version>
     </dependency>
   </dependencies>
+  <developers>
+    <developer>
+      <name>Alexia</name>
+      <email>alexiacr@hotmail.com</email>
+      <roles>
+        <role>Estudiante</role>
+      </roles>
+    </developer>
+      <developer>
+        <name>Su nombre</name>
+        <email>su correo</email>
+        <roles>
+          <role>Estudiante</role>
+        </roles>
+      </developer>
+  </developers>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+        <version>3.1</version>
+      </plugin>
+    </plugins>
+  </build>
 </project>
