@@ -1,4 +1,4 @@
-package cr.ac.ucr.ecci.ci1310.cache;
+package cr.ac.ucr.ecci.ci1310.cache.model;
 
 import java.util.PriorityQueue;
 
@@ -10,26 +10,34 @@ public class LRUCache<K, V> extends MapCache<K, V> {
 
     public LRUCache(int maxElements, String name, int size, long lifespan, long elemLifespan) {
         super(maxElements, name, size, lifespan, elemLifespan);
+        entryPriorityQueue = new PriorityQueue<>();
     }
 
     public LRUCache(String name, int size, long lifespan, long elemLifespan) {
         super(name, size, lifespan, elemLifespan);
+        entryPriorityQueue = new PriorityQueue<>();
+
     }
 
     public LRUCache(int maxElements, String name, int size, long elemLifespan) {
         super(maxElements, name, size, elemLifespan);
+        entryPriorityQueue = new PriorityQueue<>();
+
     }
 
     public LRUCache(int maxElements, String name, int size) {
         super(maxElements, name, size);
+        entryPriorityQueue = new PriorityQueue<>();
     }
 
     public LRUCache(String name, int size) {
         super(name, size);
+        entryPriorityQueue = new PriorityQueue<>();
+
     }
 
     public String getName() {
-        return null;
+        return this.getSuperName();
     }
 
     public V get(K key) {

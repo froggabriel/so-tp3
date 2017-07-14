@@ -1,4 +1,4 @@
-package cr.ac.ucr.ecci.ci1310.cache;
+package cr.ac.ucr.ecci.ci1310.cache.model;
 
 import java.util.HashMap;
 
@@ -51,5 +51,9 @@ abstract class MapCache<K, V> implements Cache<K, V> {
         this.size = size;
         this.lifespan = -1;
         this.elemLifespan = 3600;
+    }
+
+    public final String getSuperName() {
+        return this.name;
     }
 }

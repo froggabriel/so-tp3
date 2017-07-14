@@ -1,5 +1,6 @@
-package cr.ac.ucr.ecci.ci1310.cache;
+package cr.ac.ucr.ecci.ci1310.cache.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,26 +11,34 @@ public class RandomCache<K, V> extends MapCache<K, V> {
 
     public RandomCache(int maxElements, String name, int size, long lifespan, long elemLifespan) {
         super(maxElements, name, size, lifespan, elemLifespan);
+        entryList = new ArrayList<>();
     }
 
     public RandomCache(String name, int size, long lifespan, long elemLifespan) {
         super(name, size, lifespan, elemLifespan);
+        entryList = new ArrayList<>();
     }
 
     public RandomCache(int maxElements, String name, int size, long elemLifespan) {
         super(maxElements, name, size, elemLifespan);
+        entryList = new ArrayList<>();
+
     }
 
     public RandomCache(int maxElements, String name, int size) {
         super(maxElements, name, size);
+        entryList = new ArrayList<>();
+
     }
 
     public RandomCache(String name, int size) {
         super(name, size);
+        entryList = new ArrayList<>();
+
     }
 
     public String getName() {
-        return null;
+        return this.getSuperName();
     }
 
     public V get(K key) {
