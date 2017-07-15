@@ -6,7 +6,7 @@ import java.util.HashMap;
  * Structure for caches with hashmap as storage structure
  */
 abstract class MapCache<K, V> implements Cache<K, V> {
-    protected HashMap<K, Entry> data;
+    protected HashMap<K, Entry<K, V>> data;
     protected int maxElements;
     protected String name;
     protected int size;
@@ -38,5 +38,17 @@ abstract class MapCache<K, V> implements Cache<K, V> {
         this.size = size;
         this.lifespan = lifespan;
         this.elemLifespan = elemLifespan;
+        data = new HashMap<>(maxElements);
+    }
+
+    protected boolean isFull() {
+        return data.size() >= maxElements;
+    }
+
+    @Override
+    public String toString() {
+        return "Name: " + name + "\n"
+                + "Size: " + data.size() + "\n"
+                + "Max size: " + maxElements + "\n";
     }
 }

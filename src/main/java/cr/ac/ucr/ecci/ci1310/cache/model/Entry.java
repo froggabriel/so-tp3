@@ -18,6 +18,7 @@ public class Entry<K, V> {
     public Entry(K key, V value) {
         this.key = key;
         this.value = value;
+        lastQueryDate = new Date();
     }
 
     public K getKey() {
@@ -40,9 +41,12 @@ public class Entry<K, V> {
         return lastQueryDate;
     }
 
-    public void setLastQueryDate(Date lastQueryDate) {
-        this.lastQueryDate = lastQueryDate;
+    public void updateLastQueryDate() {
+        this.lastQueryDate = new Date();
     }
 
-
+    @Override
+    public boolean equals(Object otherEntry) {
+        return otherEntry.getClass() == this.getClass() && this.key == ((Entry<K, V>) otherEntry).key;
+    }
 }
