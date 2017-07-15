@@ -7,53 +7,36 @@ import java.util.HashMap;
  */
 abstract class MapCache<K, V> implements Cache<K, V> {
     protected HashMap<K, Entry> data;
-    private int maxElements;
-    private String name;
-    private int size;
-    private long lifespan;
-    private long elemLifespan;
+    protected int maxElements;
+    protected String name;
+    protected int size;
+    protected long lifespan;
+    protected long elemLifespan;
 
     MapCache(int maxElements, String name, int size, long lifespan, long elemLifespan) {
-        this.maxElements = maxElements;
-        this.name = name;
-        this.size = size;
-        this.lifespan = lifespan;
-        this.elemLifespan = elemLifespan;
+        set(maxElements, name, size, lifespan, elemLifespan);
     }
 
     MapCache(String name, int size, long lifespan, long elemLifespan) {
-        this.maxElements = 10;
+        set(10, name, size, lifespan, elemLifespan);
+    }
+
+    MapCache(int maxElements, String name, int size, long elemLifespan) {
+        set(maxElements, name, size, -1, elemLifespan);
+    }
+
+    MapCache(int maxElements, String name, int size) {
+        set(maxElements, name, size, -1, 3600);
+    }
+
+    MapCache(String name, int size) {
+        set(10, name, size, -1, 3600);
+    }
+    private void set(int maxElements, String name, int size, long lifespan, long elemLifespan) {
+        this.maxElements = maxElements;
         this.name = name;
         this.size = size;
         this.lifespan = lifespan;
         this.elemLifespan = elemLifespan;
-    }
-
-    MapCache(int maxElements, String name, int size, long elemLifespan) {
-        this.maxElements = maxElements;
-        this.name = name;
-        this.size = size;
-        this.lifespan = -1;
-        this.elemLifespan = elemLifespan;
-    }
-
-    MapCache(int maxElements, String name, int size) {
-        this.maxElements = maxElements;
-        this.name = name;
-        this.size = size;
-        this.lifespan = -1;
-        this.elemLifespan = 3600;
-    }
-
-    MapCache(String name, int size) {
-        this.maxElements = 10;
-        this.name = name;
-        this.size = size;
-        this.lifespan = -1;
-        this.elemLifespan = 3600;
-    }
-
-    public final String getSuperName() {
-        return this.name;
     }
 }

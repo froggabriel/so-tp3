@@ -37,7 +37,7 @@ public class LRUCache<K, V> extends MapCache<K, V> {
     }
 
     public String getName() {
-        return this.getSuperName();
+        return this.name;
     }
 
     public V get(K key) {

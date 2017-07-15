@@ -37,7 +37,7 @@ public class FIFOCache<K, V> extends MapCache<K, V> {
     }
 
     public String getName() { //name lo asigna super, como se obtiene?
-        return this.getSuperName();
+        return this.name;
     }
 
     public V get(K key) {
@@ -45,7 +45,7 @@ public class FIFOCache<K, V> extends MapCache<K, V> {
     }
 
     public void put(K key, V value) {
-        entryQueue.add(new Entry(key, value));
+        entryQueue.add(new Entry<>(key, value));
     }
 
     public void evict(K key) { //remove

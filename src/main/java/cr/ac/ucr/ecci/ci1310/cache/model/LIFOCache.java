@@ -34,7 +34,7 @@ public class LIFOCache<K, V> extends MapCache<K, V> {
     }
 
     public String getName() {
-        return this.getSuperName();
+        return this.name;
     }
 
     public V get(K key) { //??
@@ -44,7 +44,7 @@ public class LIFOCache<K, V> extends MapCache<K, V> {
     }
 
     public void put(K key, V value) {
-        entryStack.push(new Entry(key, value));
+        entryStack.push(new Entry<>(key, value));
     }
 
     public void evict(K key) {
