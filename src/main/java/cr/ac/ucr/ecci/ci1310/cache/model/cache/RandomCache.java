@@ -1,4 +1,6 @@
-package cr.ac.ucr.ecci.ci1310.cache.model;
+package cr.ac.ucr.ecci.ci1310.cache.model.cache;
+
+import cr.ac.ucr.ecci.ci1310.cache.model.Entry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,10 +36,12 @@ public class RandomCache<K, V> extends MapCache<K, V> {
         entryList = new ArrayList<>();
     }
 
+    @Override
     public String getName() {
         return this.name;
     }
 
+    @Override
     public synchronized V get(K key) {
         Entry<K, V> targetEntry = data.get(key);
         if(targetEntry == null) {
@@ -48,6 +52,7 @@ public class RandomCache<K, V> extends MapCache<K, V> {
         }
     }
 
+    @Override
     public synchronized void put(K key, V value) {
         while(isFull()) { //remove least recently used element if full
             int rand = (int)((Math.random() * entryList.size()));
@@ -59,11 +64,13 @@ public class RandomCache<K, V> extends MapCache<K, V> {
         data.put(key, newEntry);
     }
 
+    @Override
     public synchronized void evict(K key) {
         entryList.remove(new Entry<K, V>(key, null)); //Comparator compares by key
         data.remove(key);
     }
 
+    @Override
     public synchronized void clear() {
         entryList.clear();
         data.clear();

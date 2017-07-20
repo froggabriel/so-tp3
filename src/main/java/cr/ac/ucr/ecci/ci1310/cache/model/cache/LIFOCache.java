@@ -1,4 +1,6 @@
-package cr.ac.ucr.ecci.ci1310.cache.model;
+package cr.ac.ucr.ecci.ci1310.cache.model.cache;
+
+import cr.ac.ucr.ecci.ci1310.cache.model.Entry;
 
 import java.util.Stack;
 
@@ -33,24 +35,29 @@ public class LIFOCache<K, V> extends MapCache<K, V> {
         this.entryStack = new Stack<>();
     }
 
+    @Override
     public String getName() {
         return this.name;
     }
 
-    public V get(K key) { //??
+    @Override
+    public V get(K key) {
         int index = entryStack.search(key);
         V value = entryStack.get(index).getValue();
         return value;
     }
 
+    @Override
     public void put(K key, V value) {
         entryStack.push(new Entry<>(key, value));
     }
 
+    @Override
     public void evict(K key) {
         entryStack.remove(key);
     }
 
+    @Override
     public void clear() {
         entryStack.clear();
 

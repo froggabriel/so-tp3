@@ -1,7 +1,7 @@
-package cr.ac.ucr.ecci.ci1310.cache.model;
+package cr.ac.ucr.ecci.ci1310.cache.model.cache;
 
-import java.util.ArrayDeque;
-import java.util.Iterator;
+import cr.ac.ucr.ecci.ci1310.cache.model.Entry;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -36,22 +36,28 @@ public class FIFOCache<K, V> extends MapCache<K, V> {
         this.entryQueue = new LinkedList<>();
     }
 
+    @Override
     public String getName() { //name lo asigna super, como se obtiene?
         return this.name;
     }
 
+    @Override
     public V get(K key) {
-        return null;
+        V value = data.get(key).getValue();
+        return value;
     }
 
+    @Override
     public void put(K key, V value) {
         entryQueue.add(new Entry<>(key, value));
     }
 
+    @Override
     public void evict(K key) { //remove
         entryQueue.remove(key);
     }
 
+    @Override
     public void clear() {
         entryQueue.clear();
     }

@@ -1,4 +1,6 @@
-package cr.ac.ucr.ecci.ci1310.cache.model;
+package cr.ac.ucr.ecci.ci1310.cache.model.cache;
+
+import cr.ac.ucr.ecci.ci1310.cache.model.Entry;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;

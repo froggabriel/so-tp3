@@ -1,5 +1,7 @@
 package cr.ac.ucr.ecci.ci1310.cache.core.service;
 
+import cr.ac.ucr.ecci.ci1310.cache.model.WikiPage;
+
 /**
  * Created by alexiaborchgrevink on 7/13/17.
  */
