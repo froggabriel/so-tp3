@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by alexiaborchgrevink on 7/13/17.
  */
-public class WikiServiceImpl implements WikiService {
+public class WikiServiceImpl implements WikiService<WikiPage> {
 
     private WikiDao wikiDao;
 
