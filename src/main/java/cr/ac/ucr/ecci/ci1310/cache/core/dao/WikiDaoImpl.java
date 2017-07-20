@@ -5,6 +5,7 @@ import cr.ac.ucr.ecci.ci1310.cache.model.WikiPage;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Created by alexiaborchgrevink on 7/13/17.
@@ -16,8 +17,12 @@ public class WikiDaoImpl implements WikiDao {
 
     public WikiDaoImpl() {
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/wiki?" +
-                    "user=wiki&password=wiki");
+            String url = "jdbc:mysql://localhost:3306/wiki";
+            String user = "root";
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Enter password for root...");
+            String password = scan.next();
+            conn = DriverManager.getConnection(url, user, password);
             statement = conn.createStatement();
         }catch(SQLException e) {
             e.printStackTrace();

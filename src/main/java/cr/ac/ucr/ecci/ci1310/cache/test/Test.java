@@ -15,13 +15,13 @@ public class Test {
     public Test(){};
     public static void main(String[] args) {
         WikiDao wikiDao = new WikiDaoImpl();
-        WikiService<WikiPage> service= new WikiServiceImpl(wikiDao);
+        WikiService service = new WikiServiceImpl(wikiDao);
         Test test = new Test();
         for(int i = 0; i < 6; i++)
             test.runAllTests(service, 20000, 10000);
     }
-
-    private void runAllTests(WikiService<WikiPage> service, int times, int cachedElems) {
+    
+    private void runAllTests(WikiService service, int times, int cachedElems) {
         System.out.println("Test");
         System.out.println(runTest(service, times, new FIFOCache<>(cachedElems,"fifo")));
         System.out.println(runTest(service, times, new LIFOCache<>(cachedElems,"lifo")));
@@ -30,7 +30,7 @@ public class Test {
         System.out.println(runTest(service, times, null));
     }
 
-    private long runTest(WikiService<WikiPage> service, int times, Cache<String, WikiPage> cache) {
+    private long runTest(WikiService service, int times, Cache<String, WikiPage> cache) {
         if(cache == null) {
             return runNormalTest(service, times);
         } else {
@@ -38,7 +38,7 @@ public class Test {
         }
     }
 
-    private long runCacheTest(WikiService<WikiPage> service, int times, Cache<String, WikiPage> cache) {
+    private long runCacheTest(WikiService service, int times, Cache<String, WikiPage> cache) {
         int rand_id;
         String key;
         long startTime = System.currentTimeMillis();
@@ -57,7 +57,7 @@ public class Test {
         return System.currentTimeMillis() - startTime;
     }
 
-    private long runNormalTest(WikiService<WikiPage> service, int times) {
+    private long runNormalTest(WikiService service, int times) {
         int rand_id;
         String key;
         WikiPage result;

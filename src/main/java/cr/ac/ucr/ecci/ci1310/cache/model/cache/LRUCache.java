@@ -19,7 +19,6 @@ public class LRUCache<K, V> extends MapCache<K, V> {
     public LRUCache(String name, long lifespan, long elemLifespan) {
         super(name, lifespan, elemLifespan);
         initPriorityQueue();
-
     }
 
     public LRUCache(int maxElements, String name, long elemLifespan) {
