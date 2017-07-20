@@ -11,28 +11,28 @@ import java.util.Queue;
 public class FIFOCache<K, V> extends MapCache<K, V> {
     private Queue<Entry<K, V>> entryQueue;
 
-    public FIFOCache(int maxElements, String name, int size, long lifespan, long elemLifespan) {
-        super(maxElements, name, size, lifespan, elemLifespan);
+    public FIFOCache(int maxElements, String name, long lifespan, long elemLifespan) {
+        super(maxElements, name, lifespan, elemLifespan);
         this.entryQueue = new LinkedList<>();
     }
 
-    public FIFOCache(String name, int size, long lifespan, long elemLifespan) {
-        super(name, size, lifespan, elemLifespan);
+    public FIFOCache(String name, long lifespan, long elemLifespan) {
+        super(name, lifespan, elemLifespan);
         this.entryQueue = new LinkedList<>();
     }
 
-    public FIFOCache(int maxElements, String name, int size, long elemLifespan) {
-        super(maxElements, name, size, elemLifespan);
+    public FIFOCache(int maxElements, String name, long elemLifespan) {
+        super(maxElements, name, elemLifespan);
         this.entryQueue = new LinkedList<>();
     }
 
-    public FIFOCache(int maxElements, String name, int size) {
-        super(maxElements, name, size);
+    public FIFOCache(int maxElements, String name) {
+        super(maxElements, name);
         this.entryQueue = new LinkedList<>();
     }
 
-    public FIFOCache(String name, int size) {
-        super(name, size);
+    public FIFOCache(String name) {
+        super(name);
         this.entryQueue = new LinkedList<>();
     }
 
@@ -43,22 +43,37 @@ public class FIFOCache<K, V> extends MapCache<K, V> {
 
     @Override
     public V get(K key) {
-        V value = data.get(key).getValue();
-        return value;
+        Entry<K, V> targetEntry = data.get(key);
+        if(targetEntry == null) {
+            return null;
+        } else {
+            entryQueue.remove(targetEntry);
+            entryQueue.add(targetEntry);
+            targetEntry.updateLastQueryDate();
+            return targetEntry.getValue();
+        }
     }
 
     @Override
     public void put(K key, V value) {
-        entryQueue.add(new Entry<>(key, value));
+        while(isFull()) { //remove from queue if full
+            Entry<K, V> targetEntry = entryQueue.remove();
+            data.remove(targetEntry.getKey());
+        }
+        Entry<K, V> newEntry = new Entry<>(key, value);
+        entryQueue.add(newEntry);
+        data.put(key, newEntry);
     }
 
     @Override
     public void evict(K key) { //remove
-        entryQueue.remove(key);
+        entryQueue.remove(new Entry<K, V>(key, null)); //Comparator compares by key
+        data.remove(key);
     }
 
     @Override
     public void clear() {
         entryQueue.clear();
+        data.clear();
     }
 }

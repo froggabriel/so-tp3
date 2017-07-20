@@ -2,48 +2,66 @@ package cr.ac.ucr.ecci.ci1310.cache.core.dao;
 
 import cr.ac.ucr.ecci.ci1310.cache.model.WikiPage;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by alexiaborchgrevink on 7/13/17.
  */
 public class WikiDaoImpl implements WikiDao {
 
+    private Connection conn;
     private Statement statement;
+
+    public WikiDaoImpl() {
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/wiki?" +
+                    "user=wiki&password=wiki");
+            statement = conn.createStatement();
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public WikiPage findById(String id) {
         WikiPage page = new WikiPage();
         ResultSet resultSet;
         try {
-            resultSet = statement.executeQuery("SELECT page_id, page_title, page_len FROM page WHERE id = " + id);
+            resultSet = statement.executeQuery("SELECT page_id, page_title, page_len FROM wiki.page WHERE page_id = " + id);
             if (resultSet.next()) {
-                page.setId(resultSet.getString("id"));
+                page.setId(resultSet.getString("page_id"));
                 page.setPage_len(resultSet.getString("page_len"));
                 page.setPage_title(resultSet.getString("page_title"));
             }
+            else {
+                return null;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
         return page;
     }
 
     @Override
-    public WikiPage findByTitle(String title) {
-        WikiPage page = new WikiPage();
+    public List<WikiPage> findByTitle(String title) {
+        List<WikiPage> results = new ArrayList<>();
         ResultSet resultSet;
         try {
-            resultSet = statement.executeQuery("SELECT page_id, page_title, page_len FROM page WHERE page_title = " + title);
-            if (resultSet.next()) {
-                page.setId(resultSet.getString("id"));
-                page.setPage_len(resultSet.getString("page_len"));
-                page.setPage_title(resultSet.getString("page_title"));
+            resultSet = statement.executeQuery("SELECT page_id, page_title, page_len FROM wiki.page WHERE page_title = \'" + title + "\'");
+            if(resultSet == null) {
+                return null;
+            }
+            while (resultSet.next()) {
+                results.add(new WikiPage(resultSet.getString("page_id"),
+                        resultSet.getString("page_len"),
+                        resultSet.getString("page_title")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return page;
+        return results;
     }
 }

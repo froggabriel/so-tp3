@@ -11,28 +11,28 @@ import java.util.List;
 public class RandomCache<K, V> extends MapCache<K, V> {
     private List<Entry<K, V>> entryList;
 
-    public RandomCache(int maxElements, String name, int size, long lifespan, long elemLifespan) {
-        super(maxElements, name, size, lifespan, elemLifespan);
+    public RandomCache(int maxElements, String name, long lifespan, long elemLifespan) {
+        super(maxElements, name, lifespan, elemLifespan);
         entryList = new ArrayList<>();
     }
 
-    public RandomCache(String name, int size, long lifespan, long elemLifespan) {
-        super(name, size, lifespan, elemLifespan);
+    public RandomCache(String name, long lifespan, long elemLifespan) {
+        super(name, lifespan, elemLifespan);
         entryList = new ArrayList<>();
     }
 
-    public RandomCache(int maxElements, String name, int size, long elemLifespan) {
-        super(maxElements, name, size, elemLifespan);
+    public RandomCache(int maxElements, String name, long elemLifespan) {
+        super(maxElements, name, elemLifespan);
         entryList = new ArrayList<>();
     }
 
-    public RandomCache(int maxElements, String name, int size) {
-        super(maxElements, name, size);
+    public RandomCache(int maxElements, String name) {
+        super(maxElements, name);
         entryList = new ArrayList<>();
     }
 
-    public RandomCache(String name, int size) {
-        super(name, size);
+    public RandomCache(String name) {
+        super(name);
         entryList = new ArrayList<>();
     }
 

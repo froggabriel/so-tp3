@@ -11,38 +11,40 @@ abstract class MapCache<K, V> implements Cache<K, V> {
     protected HashMap<K, Entry<K, V>> data;
     protected int maxElements;
     protected String name;
-    protected int size;
     protected long lifespan;
     protected long elemLifespan;
 
-    MapCache(int maxElements, String name, int size, long lifespan, long elemLifespan) {
-        set(maxElements, name, size, lifespan, elemLifespan);
+    MapCache(int maxElements, String name, long lifespan, long elemLifespan) {
+        set(maxElements, name, lifespan, elemLifespan);
     }
 
-    MapCache(String name, int size, long lifespan, long elemLifespan) {
-        set(10, name, size, lifespan, elemLifespan);
+    MapCache(String name, long lifespan, long elemLifespan) {
+        set(10, name, lifespan, elemLifespan);
     }
 
-    MapCache(int maxElements, String name, int size, long elemLifespan) {
-        set(maxElements, name, size, -1, elemLifespan);
+    MapCache(int maxElements, String name, long elemLifespan) {
+        set(maxElements, name, -1, elemLifespan);
     }
 
-    MapCache(int maxElements, String name, int size) {
-        set(maxElements, name, size, -1, 3600);
+    MapCache(int maxElements, String name) {
+        set(maxElements, name, -1, 3600);
     }
 
-    MapCache(String name, int size) {
-        set(10, name, size, -1, 3600);
+    MapCache(String name) {
+        set(10, name, -1, 3600);
     }
-    private void set(int maxElements, String name, int size, long lifespan, long elemLifespan) {
+    private void set(int maxElements, String name, long lifespan, long elemLifespan) {
         this.maxElements = maxElements;
         this.name = name;
-        this.size = size;
         this.lifespan = lifespan;
         this.elemLifespan = elemLifespan;
         data = new HashMap<>(maxElements);
     }
 
+    /**
+     * Determines if cache is full
+     * @return true if cache is full
+     */
     protected boolean isFull() {
         return data.size() >= maxElements;
     }

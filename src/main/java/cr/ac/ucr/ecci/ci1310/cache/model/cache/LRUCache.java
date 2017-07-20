@@ -11,30 +11,30 @@ import java.util.PriorityQueue;
 public class LRUCache<K, V> extends MapCache<K, V> {
     private PriorityQueue<Entry<K, V>> entryPriorityQueue;
 
-    public LRUCache(int maxElements, String name, int size, long lifespan, long elemLifespan) {
-        super(maxElements, name, size, lifespan, elemLifespan);
-        initPriorityQueue(maxElements);
+    public LRUCache(int maxElements, String name, long lifespan, long elemLifespan) {
+        super(maxElements, name, lifespan, elemLifespan);
+        initPriorityQueue();
     }
 
-    public LRUCache(String name, int size, long lifespan, long elemLifespan) {
-        super(name, size, lifespan, elemLifespan);
-        initPriorityQueue(maxElements);
+    public LRUCache(String name, long lifespan, long elemLifespan) {
+        super(name, lifespan, elemLifespan);
+        initPriorityQueue();
 
     }
 
-    public LRUCache(int maxElements, String name, int size, long elemLifespan) {
-        super(maxElements, name, size, elemLifespan);
-        initPriorityQueue(maxElements);
+    public LRUCache(int maxElements, String name, long elemLifespan) {
+        super(maxElements, name, elemLifespan);
+        initPriorityQueue();
     }
 
-    public LRUCache(int maxElements, String name, int size) {
-        super(maxElements, name, size);
-        initPriorityQueue(maxElements);
+    public LRUCache(int maxElements, String name) {
+        super(maxElements, name);
+        initPriorityQueue();
     }
 
-    public LRUCache(String name, int size) {
-        super(name, size);
-        initPriorityQueue(maxElements);
+    public LRUCache(String name) {
+        super(name);
+        initPriorityQueue();
     }
 
     public String getName() {
@@ -71,7 +71,10 @@ public class LRUCache<K, V> extends MapCache<K, V> {
         data.clear();
     }
 
-    private void initPriorityQueue(int maxElements) {
+    /**
+     * Initializes priority queue with comparator based on Entry's lastQueryDate
+     */
+    private void initPriorityQueue() {
         Comparator<Entry<K, V>> comparator = new Comparator<Entry<K, V>>() {
             @Override
             public int compare(Entry<K, V> o1, Entry<K, V> o2) {

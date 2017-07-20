@@ -13,7 +13,7 @@ public class WikiPage {
 
     }
 
-    public WikiPage(String page_title, String id, String page_len) {
+    public WikiPage(String id, String page_len, String page_title) {
         this.page_title = page_title;
         this.id = id;
         this.page_len = page_len;
@@ -43,5 +43,10 @@ public class WikiPage {
         this.page_len = page_len;
     }
 
-
+    @Override
+    public String toString() {
+        return "Page ID: " + id + "\n"
+            + "Page length: " + page_len + "\n"
+            + "Page title: " + page_title + "\n";
+    }
 }

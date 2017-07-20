@@ -10,28 +10,28 @@ import java.util.Stack;
 public class LIFOCache<K, V> extends MapCache<K, V> {
     private Stack<Entry<K, V>> entryStack;
 
-    public LIFOCache(int maxElements, String name, int size, long lifespan, long elemLifespan) {
-        super(maxElements, name, size, lifespan, elemLifespan);
+    public LIFOCache(int maxElements, String name, long lifespan, long elemLifespan) {
+        super(maxElements, name, lifespan, elemLifespan);
         this.entryStack = new Stack<>();
     }
 
-    public LIFOCache(String name, int size, long lifespan, long elemLifespan) {
-        super(name, size, lifespan, elemLifespan);
+    public LIFOCache(String name, long lifespan, long elemLifespan) {
+        super(name, lifespan, elemLifespan);
         this.entryStack = new Stack<>();
     }
 
-    public LIFOCache(int maxElements, String name, int size, long elemLifespan) {
-        super(maxElements, name, size, elemLifespan);
+    public LIFOCache(int maxElements, String name, long elemLifespan) {
+        super(maxElements, name, elemLifespan);
         this.entryStack = new Stack<>();
     }
 
-    public LIFOCache(int maxElements, String name, int size) {
-        super(maxElements, name, size);
+    public LIFOCache(int maxElements, String name) {
+        super(maxElements, name);
         this.entryStack = new Stack<>();
     }
 
-    public LIFOCache(String name, int size) {
-        super(name, size);
+    public LIFOCache(String name) {
+        super(name);
         this.entryStack = new Stack<>();
     }
 
@@ -42,24 +42,37 @@ public class LIFOCache<K, V> extends MapCache<K, V> {
 
     @Override
     public V get(K key) {
-        int index = entryStack.search(key);
-        V value = entryStack.get(index).getValue();
-        return value;
+        Entry<K, V> targetEntry = data.get(key);
+        if(targetEntry == null) {
+            return null;
+        } else {
+            entryStack.remove(targetEntry);
+            entryStack.push(targetEntry);
+            targetEntry.updateLastQueryDate();
+            return targetEntry.getValue();
+        }
     }
 
     @Override
     public void put(K key, V value) {
-        entryStack.push(new Entry<>(key, value));
+        while(isFull()) { //pop from stack if full
+            Entry<K, V> targetEntry = entryStack.pop();
+            data.remove(targetEntry.getKey());
+        }
+        Entry<K, V> newEntry = new Entry<>(key, value);
+        entryStack.push(newEntry);
+        data.put(key, newEntry);
     }
 
     @Override
     public void evict(K key) {
-        entryStack.remove(key);
+        entryStack.remove(new Entry<K, V>(key, null)); //compares by key
+        data.remove(key);
     }
 
     @Override
     public void clear() {
         entryStack.clear();
-
+        data.clear();
     }
 }

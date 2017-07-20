@@ -1,8 +1,5 @@
 package cr.ac.ucr.ecci.ci1310.cache.build;
 
-import cr.ac.ucr.ecci.ci1310.cache.model.cache.Cache;
-import cr.ac.ucr.ecci.ci1310.cache.model.cache.FIFOCache;
-
 import java.util.Scanner;
 
 /**
@@ -10,6 +7,9 @@ import java.util.Scanner;
  */
 public class MenuController {
 
+    public static void main(String[] args) {
+        new MenuController().Menu();
+    }
     public void Menu() {
         System.out.println("Especifique si desea usar el cache.\n 1 - el cache sera utilizado\n 2 - el cache no sera utilizado");
         Scanner scanner = new Scanner(System.in);
