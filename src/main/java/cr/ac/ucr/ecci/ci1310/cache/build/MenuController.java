@@ -133,10 +133,14 @@ public class MenuController {
 
     public WikiPage findIdByService(String id) {
         WikiPage page = this.wikiService.findById(id);
-        System.out.println("El resultado de su consulta es:");
-        System.out.println(" -> id = " + page.getId());
-        System.out.println(" -> titulo = " + page.getPage_title());
-        System.out.println(" -> length = " + page.getPage_len() + "\n");
+        if (page != null) {
+            System.out.println("El resultado de su consulta es:");
+            System.out.println(" -> id = " + page.getId());
+            System.out.println(" -> titulo = " + page.getPage_title());
+            System.out.println(" -> length = " + page.getPage_len() + "\n");
+        } else {
+            System.out.println("El id no fue encontrado");
+        }
         return page;
     }
 
