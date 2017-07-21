@@ -17,10 +17,12 @@ public class Test {
         WikiDao wikiDao = new WikiDaoImpl();
         WikiService service = new WikiServiceImpl(wikiDao);
         Test test = new Test();
-        test.runAllTests(service, 20000, 1000);
+        for(int i = 0; i < 6; i++)
+            test.runAllTests(service, 20000, 10000);
     }
-
+    
     private void runAllTests(WikiService service, int times, int cachedElems) {
+        System.out.println("Test");
         System.out.println(runTest(service, times, new FIFOCache<>(cachedElems,"fifo")));
         System.out.println(runTest(service, times, new LIFOCache<>(cachedElems,"lifo")));
         System.out.println(runTest(service, times, new LRUCache<>(cachedElems,"lru")));
