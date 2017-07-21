@@ -15,25 +15,20 @@
       <version>6.0.6</version>
     </dependency>
     <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>6.0.6</version>
+      <groupId>mwdumper1.25.jar</groupId>
+      <artifactId>mwdumper</artifactId>
+      <version>1.25</version>
+      <systemPath>/Users/alexiaborchgrevink/Desktop/TareaCortaCache/mwdumper1.25.jar</systemPath>
     </dependency>
   </dependencies>
   <developers>
     <developer>
       <name>Alexia</name>
       <email>alexiacr@hotmail.com</email>
-      <roles>
-        <role>Estudiante</role>
-      </roles>
     </developer>
       <developer>
         <name>Gabriel Vidaurre</name>
         <email>gabrielvidaurrerodriguez@gmail.com</email>
-        <roles>
-          <role>Estudiante</role>
-        </roles>
       </developer>
   </developers>
   <build>

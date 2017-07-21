@@ -21,8 +21,8 @@ public class MenuController {
 
     WikiDao wikiDao = new WikiDaoImpl();
     WikiService wikiService = new WikiServiceImpl(wikiDao);
-    Cache cache1;
-    Cache cache2;
+    Cache cacheById;
+    Cache cacheByTitle;
 
     public static void main(String[] args) {
         new MenuController().Menu();
@@ -41,15 +41,15 @@ public class MenuController {
                 System.out.println("Ingrese el nombre del cache");
                 String cacheName = scanner.next();
                 System.out.println("Puede realizar consultas a la base de datos de acuerdo a id y/o titulo");
-                cache1 = new LRUCache(numElementos, cacheName);
-                cache2 = new RandomCache(numElementos, cacheName);
+                cacheById = new LRUCache(numElementos, cacheName);
+                cacheByTitle = new RandomCache(numElementos, cacheName);
                 while (true) {
                     System.out.println("Especifique el tipo de consulta que desea realizar.\n 1 - Buscar por id \n 2 - Buscar por titulo");
-                    int tipoConsulta = scanner.nextInt();
-                    if (tipoConsulta == 1) {
-                        versionConCache(this.cache1, tipoConsulta);
+                    int consultType = scanner.nextInt();
+                    if (consultType == 1) {
+                        cacheVersion(this.cacheById, consultType);
                     } else {
-                        versionConCache(this.cache2, tipoConsulta);
+                        cacheVersion(this.cacheByTitle, consultType);
                     }
                     System.out.println("Desea continuar?\n1 - Si\n0 - No");
                     int continuar = scanner.nextInt();
@@ -62,8 +62,8 @@ public class MenuController {
                 System.out.println("-- El cache no sera utilizado -- ");
                 while (true) {
                     System.out.println("Especifique el tipo de consulta que desea realizar.\n 1 - Buscar por id \n 2 - Buscar por titulo");
-                    int tipoConsulta2 = scanner.nextInt();
-                    switch (tipoConsulta2) {
+                    int consultType2 = scanner.nextInt();
+                    switch (consultType2) {
                         case 1: //consulta por id
                             System.out.println("Ingrese el id a consultar");
                             String findId = scanner.next();
@@ -84,23 +84,23 @@ public class MenuController {
         }
     }
 
-    public void versionConCache(Cache cache, int tipoConsulta) {
+    public void cacheVersion(Cache cache, int consultType) {
         Scanner scanner = new Scanner(System.in);
-        switch (tipoConsulta) {
+        switch (consultType) {
             case 1: //consulta por id
                 System.out.println("Ingrese el id a consultar");
                 String findId = scanner.next();
-                this.consultaPorId(findId, cache);
+                this.queryById(findId, cache);
                 break;
             case 2: //consulta por titulo
                 System.out.println("Ingrese el titulo a consultar");
                 String findTitle = scanner.next();
-                this.consultaPorTitulo(findTitle, cache);
+                this.queryByTitle(findTitle, cache);
                 break;
         }
     }
 
-    public void consultaPorId(String findId, Cache cache) {
+    public void queryById(String findId, Cache cache) {
         WikiPage page;
         page = (WikiPage) cache.get(findId);
         if (page != null) {
@@ -114,7 +114,7 @@ public class MenuController {
         }
     }
 
-    public void consultaPorTitulo(String findTitle, Cache cache) {
+    public void queryByTitle(String findTitle, Cache cache) {
         List<WikiPage> pages = (List<WikiPage>) cache.get(findTitle);
         if (pages != null) {
             Iterator<WikiPage> it = pages.iterator();
